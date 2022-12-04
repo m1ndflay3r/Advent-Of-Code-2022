@@ -1,5 +1,22 @@
 #!/usr/bin/env zsh
 
+##
+## uncomment to generate libraw from OGinput
+##
+#
+# OGIN=$(cat /$(pwd)/OGinput
+# IFS=$'\n\n'
+# INTERMISSION=$(for i in $=OGIN; do echo -n $i && echo -n " "; done
+# STAGE=${INTERMISSION//  /$'\n'}
+# COUNT=0
+# IFS=$'\n'
+# for i in $=STAGE; do
+#   echo "elf$COUNT=($i)" >> libraw
+#   echo "" >> libraw
+#   COUNT=$((COUNT+1))
+# done
+#
+
 source /$(pwd)/libraw
 
 COUNT=0
