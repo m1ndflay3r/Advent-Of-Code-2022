@@ -63,7 +63,9 @@ GAMESET() {
 IFS=$'\n'
 FLAGGY=0
 for i in $=STGUIDE; do
+  IFS=$' '
   for j in $=i; do
+    echo $j
     if [ $FLAGGY = 0 ]; then
       export OPPLAY=$j
       $j
@@ -74,7 +76,7 @@ for i in $=STGUIDE; do
       FLAGGY=0
     fi
   done
-  echo "$OPPLAY $PLPLAY"
+#  echo "$OPPLAY $PLPLAY"
   read NULL
   if [ "$OPPLAY" = "A" ] && [ "$PLPLAY" = "X" ]; then
     SetFlag=D gameflags
