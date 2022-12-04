@@ -88,4 +88,5 @@ until [ $COUNT -gt 250 ]; do
   COUNT=$((COUNT+1))
 done
 
-echo "Total supplies of runner-ups is $((TCT+TDT))"
+MYAAH=$((TCT+TDT))
+echo "Total supplies of the 1%: $((MYAAH+TBT))"
