@@ -1,112 +1,56 @@
 #!/usr/bin/env zsh
 
-PSCORE=0
-OSCORE=0
-ISPLAYER=0
-WIN=0
-LOSS=0
-DRAW=0
-SetFlag=0
-
-source /$(pwd)/OGinput
-
-A() {
-    OSCORE=$((OSCORE+1))
-}
-
-B() {
-    OSCORE=$((OSCORE+2))
-}
-
-C() {
-    OSCORE=$((OSCORE+3))
-}
-X() {
-    PSCORE=$((PSCORE+1))
-}
-
-Y() {
-    PSCORE=$((PSCORE+2))
-}
-
-Z() {
-    PSCORE=$((PSCORE+3))
-}
-
-gameflags() {
-  if [ $SetFlag = W ]; then
-    WIN=1
-    LOSS=0
-    DRAW=0
-  elif [ $SetFlag = D ]; then
-    WIN=0
-    LOSS=0
-    DRAW=0
-  elif [ $SetFlag = L ]; then
-    WIN=0
-    LOSS=1
-    DRAW=0
-  fi
-}
-
-GAMESET() {
-  if [ $WIN = 1 ]; then
-    PSCORE=$((PSCORE+6))
-  elif [ $LOSS = 1 ]; then
-    OSCORE=$((OSCORE+6))
-  elif [ $DRAW = 1 ]; then
-    PSCORE=$((PSCORE+3))
-    OSCORE=$((OSCORE+3))
-  fi
-}
+OSCORE="0"
+PSCORE="0"
 
 IFS=$'\n'
-FLAGGY=0
-for i in $=STGUIDE; do
-  IFS=$' '
-  for j in $=i; do
-    echo $j
-    if [ $FLAGGY = 0 ]; then
-      export OPPLAY=$j
-      $j
-      FLAGGY=1
-    else
-      export PLPLAY=$j
-      $j
-      FLAGGY=0
-    fi
-  done
-#  echo "$OPPLAY $PLPLAY"
-  read NULL
-  if [ "$OPPLAY" = "A" ] && [ "$PLPLAY" = "X" ]; then
-    SetFlag=D gameflags
-    GAMESET
-  elif [ "$OPPLAY" = "A" ] && [ "$PLPLAY" = "Y" ]; then
-    SetFlag=W gameflags
-    GAMESET
-  elif [ "$OPPLAY" = "A" ] && [ "$PLPLAY" = "Z" ]; then
-    SetFlag=L gameflags
-    GAMESET
-  elif [ "$OPPLAY" = "B" ] && [ "$PLPLAY" = "X" ]; then
-    SetFlag=L gameflags
-    GAMESET
-  elif [ "$OPPLAY" = "B" ] && [ "$PLPLAY" = "Y" ]; then
-    SetFlag=D gameflags
-    GAMESET
-  elif [ "$OPPLAY" = "B" ] && [ "$PLPLAY" = "Z" ]; then
-    SetFlag=W gameflags
-    GAMESET
-  elif [ "$OPPLAY" = "C" ] && [ "$PLPLAY" = "X" ]; then
-    SetFlag=W gameflags
-    GAMESET
-  elif [ "$OPPLAY" = "C" ] && [ "$PLPLAY" = "Y" ]; then
-    SetFlag=L gameflags
-    GAMESET
-  elif [ "$OPPLAY" = "C" ] && [ "$PLPLAY" = "Z" ]; then
-    SetFlag=D gameflags
-    GAMESET
-  fi
-  IFS=$'\n'
+for i in $(cat ./OGinput | grep 'B X'); do
+  OSCORE=$((OSCORE+6))
 done
-unset IFS
+for i in $(cat ./OGinput | grep 'C Y'); do
+  OSCORE=$((OSCORE+6))
+done
+for i in $(cat ./OGinput | grep 'A Z'); do
+  OSCORE=$((OSCORE+6))
+done
+for i in $(cat ./OGinput | grep 'A Y'); do
+  PSCORE=$((PSCORE+6))
+done
+for i in $(cat ./OGinput | grep 'B Z'); do
+  PSCORE=$((PSCORE+6))
+done
+for i in $(cat ./OGinput | grep 'C X'); do
+  PSCORE=$((PSCORE+6))
+done
+for i in $(cat ./OGinput | grep 'A X'); do
+  PSCORE=$((PSCORE+3))
+  OSCORE=$((OSCORE+3))
+done
+for i in $(cat ./OGinput | grep 'B Y'); do
+  PSCORE=$((PSCORE+3))
+  OSCORE=$((OSCORE+3))
+done
+for i in $(cat ./OGinput | grep 'C Z'); do
+  PSCORE=$((PSCORE+3))
+  OSCORE=$((OSCORE+3))
+done
+for i in $(cat ./OGinput | grep 'A'); do
+  OSCORE=$((OSCORE+1))
+done
+for i in $(cat ./OGinput | grep 'B'); do
+  OSCORE=$((OSCORE+1))
+done
+for i in $(cat ./OGinput | grep 'C'); do
+  OSCORE=$((OSCORE+1))
+done
+for i in $(cat ./OGinput | grep 'X'); do
+  PSCORE=$((PSCORE+1))
+done
+for i in $(cat ./OGinput | grep 'Y'); do
+  PSCORE=$((PSCORE+1))
+done
+for i in $(cat ./OGinput | grep 'Z'); do
+  PSCORE=$((PSCORE+1))
+done
+
 echo "$OSCORE $PSCORE"
