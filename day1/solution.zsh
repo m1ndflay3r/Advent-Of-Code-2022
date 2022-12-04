@@ -77,6 +77,13 @@ for wasd in $SUMS[@]; do
         BLACKLIST=$finale
       else
         echo "Total resource count: $finale"
+        if [ ! -z "$BLACKLIST" ]; then
+          if [ -z "$FINALONE" ]; then
+            export FINALONE=$finale
+          elif [ -z "$FINALTWO" ]; then
+            export FINALTWO=$finale
+          fi
+        fi
         echo " "
       fi
     done
@@ -85,6 +92,11 @@ for wasd in $SUMS[@]; do
     else
       if [ $TERMINATEALREADY = 1 ]; then
         unset MEMBERME
+        FINALFINAL=$((FINALONE+FINALTWO))
+        echo " "
+        echo "Total resource count between the two runner-up goons: $FINALFINAL"
+        unset FINALONE
+        unset FINALTWO
         exit 0
       else
         TERMINATEALREADY=1 BLACKLIST=$BLACKLIST MEMBERME=$MEMBERME . /$(pwd)/solution.zsh
