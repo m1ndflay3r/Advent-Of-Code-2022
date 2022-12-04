@@ -29,17 +29,17 @@ For example, suppose the Elves finish writing their items' Calories and end up w
 
 3000
 
-
+\n
 
 4000
 
-
+\n
 
 5000
 
 6000
 
-
+\n
 
 7000
 
@@ -47,7 +47,7 @@ For example, suppose the Elves finish writing their items' Calories and end up w
 
 9000
 
-
+\n
 
 10000
 
