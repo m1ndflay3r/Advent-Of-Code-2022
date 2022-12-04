@@ -38,19 +38,19 @@ for i in $(cat ./OGinput | grep 'A'); do
   OSCORE=$((OSCORE+1))
 done
 for i in $(cat ./OGinput | grep 'B'); do
-  OSCORE=$((OSCORE+1))
+  OSCORE=$((OSCORE+2))
 done
 for i in $(cat ./OGinput | grep 'C'); do
-  OSCORE=$((OSCORE+1))
+  OSCORE=$((OSCORE+3))
 done
 for i in $(cat ./OGinput | grep 'X'); do
   PSCORE=$((PSCORE+1))
 done
 for i in $(cat ./OGinput | grep 'Y'); do
-  PSCORE=$((PSCORE+1))
+  PSCORE=$((PSCORE+2))
 done
 for i in $(cat ./OGinput | grep 'Z'); do
-  PSCORE=$((PSCORE+1))
+  PSCORE=$((PSCORE+3))
 done
 
 echo "$OSCORE $PSCORE"
