@@ -61,8 +61,8 @@ GAMESET() {
 }
 
 IFS=$'\n'
+FLAGGY=0
 for i in $=STGUIDE; do
-  FLAGGY=0
   for j in $=i; do
     if [ $FLAGGY = 0 ]; then
       export OPPLAY=$j
