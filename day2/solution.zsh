@@ -62,19 +62,48 @@ GAMESET() {
 
 IFS=$'\n'
 for i in $=STGUIDE; do
-  i=${i// /DIV}
   FLAGGY=0
-  IFS=$'DIV'
   for j in $=i; do
     if [ $FLAGGY = 0 ]; then
-      export ISPLAYER=0
+      export OPPLAY=$j
       $j
       FLAGGY=1
     else
-      export ISPLAYER=1
+      export PLPLAY=$j
       $j
+      FLAGGY=0
     fi
   done
+  echo "$OPPLAY $PLPLAY"
+  read NULL
+  if [ "$OPPLAY" = "A" ] && [ "$PLPLAY" = "X" ]; then
+    SetFlag=D gameflags
+    GAMESET
+  elif [ "$OPPLAY" = "A" ] && [ "$PLPLAY" = "Y" ]; then
+    SetFlag=W gameflags
+    GAMESET
+  elif [ "$OPPLAY" = "A" ] && [ "$PLPLAY" = "Z" ]; then
+    SetFlag=L gameflags
+    GAMESET
+  elif [ "$OPPLAY" = "B" ] && [ "$PLPLAY" = "X" ]; then
+    SetFlag=L gameflags
+    GAMESET
+  elif [ "$OPPLAY" = "B" ] && [ "$PLPLAY" = "Y" ]; then
+    SetFlag=D gameflags
+    GAMESET
+  elif [ "$OPPLAY" = "B" ] && [ "$PLPLAY" = "Z" ]; then
+    SetFlag=W gameflags
+    GAMESET
+  elif [ "$OPPLAY" = "C" ] && [ "$PLPLAY" = "X" ]; then
+    SetFlag=W gameflags
+    GAMESET
+  elif [ "$OPPLAY" = "C" ] && [ "$PLPLAY" = "Y" ]; then
+    SetFlag=L gameflags
+    GAMESET
+  elif [ "$OPPLAY" = "C" ] && [ "$PLPLAY" = "Z" ]; then
+    SetFlag=D gameflags
+    GAMESET
+  fi
   IFS=$'\n'
 done
 unset IFS
