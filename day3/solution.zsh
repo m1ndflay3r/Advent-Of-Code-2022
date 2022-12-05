@@ -32,16 +32,16 @@ for ii in $=INPUT; do
   for jj in $COMPONEARR[@]; do
     for kk in $COMPTWOARR[@]; do
       if [ $jj = $kk ]; then
-        unset NUMVAL
-        NUMVAL=$(eval echo $"$kk")
-        TOTAL=$((TOTAL+NUMVAL))
-        break
         MATCHED=1
+        break
       else
         MATCHED=0
       fi
     done
     if [ $MATCHED = 1 ]; then
+      unset NUMVAL
+      NUMVAL=$(eval echo $"$jj")
+      TOTAL=$((TOTAL+NUMVAL))
       break
     fi
   done
