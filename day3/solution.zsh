@@ -59,7 +59,6 @@ echo "Total sum of priorities is $TOTAL"
 
 IFS=$'\n'
 COUNT=0
-GCOUNT=0
 unset PTWOARR
 TOTAL=0
 for ii in $=INPUT; do
@@ -70,7 +69,6 @@ for ii in $=INPUT; do
       $ii
     )
   else
-    GCOUNT=$((GCOUNT+1))
     zCOUNT=0
     unset COMPONEARR
     unset COMPTWOARR
