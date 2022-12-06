@@ -140,6 +140,6 @@ for ii in $=INPUT; do
   fi
   IFS=$'\n'
 done
+TOTAL=$((TOTAL-50))
 TOTAL=$((TOTAL*3))
-TOTAL=$((TOTAL-150))
 echo "Total of badge priorities is $TOTAL"
