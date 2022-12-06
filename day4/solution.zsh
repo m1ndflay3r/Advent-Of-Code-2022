@@ -3,6 +3,8 @@
 INPUT=$(cat ./OGinput)
 
 IFS=$'\n\n'
+zFLAG=0
+unset RETURN
 for a in $=INPUT; do
   IFS=$','
   for b in $=a; do
@@ -19,20 +21,24 @@ for a in $=INPUT; do
         FLAGGY=0
       fi
     done
+    unset AASTR
+    unset BBSTR
     if [ $AA -gt $BB ]; then
       until [ $AA = $BB ]; do
-        echo $BB
+        BBSTR=""$BBSTR""$BB""
         BB=$((BB+1))
       done
-      echo $BB
+      BBSTR=""$BBSTR""$BB""
     elif [ $BB -gt $AA ]; then
       until [ $BB = $AA ]; do
-        echo $AA
+        AASTR=""$AASTR""$AA""
         AA=$((AA+1))
       done
-      echo $AA
+      AASTR=""$AASTR""$AA""
+    elif [ $AA = $BB ]; then
+      AASTR=""$AASTR""$AA""
+      AA=$((AA+1))
     fi
-    IFS=$','
+    echo ""$AASTR""$BBSTR""
   done
-  IFS=$'\n\n'
 done
