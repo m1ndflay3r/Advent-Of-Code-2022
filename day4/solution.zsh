@@ -48,6 +48,7 @@ done
 
 unset IFS
 unset zRETURN
+rm -rf /$(pwd)/expandedinput
 for i in $RETURN[@]; do
   if [ $zFLAG = 0 ]; then
     zFLAG=1
@@ -55,7 +56,7 @@ for i in $RETURN[@]; do
   else
     zFLAG=0
     zRETURN=""$zRETURN" :"$i""
-    echo $zRETURN
-    echo ""
+    echo $zRETURN >> /$(pwd)/expandedinput
+    echo "" >> /$(pwd)/expandedinput
   fi
 done
