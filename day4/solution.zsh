@@ -5,6 +5,7 @@ INPUT=$(cat ./OGinput)
 IFS=$'\n\n'
 zFLAG=0
 unset RETURN
+declare -a RETURN
 for a in $=INPUT; do
   IFS=$','
   for b in $=a; do
@@ -25,20 +26,36 @@ for a in $=INPUT; do
     unset BBSTR
     if [ $AA -gt $BB ]; then
       until [ $AA = $BB ]; do
-        BBSTR=""$BBSTR""$BB""
+        BBSTR=""$BBSTR" "$BB""
         BB=$((BB+1))
       done
-      BBSTR=""$BBSTR""$BB""
+      BBSTR=""$BBSTR" "$BB""
     elif [ $BB -gt $AA ]; then
       until [ $BB = $AA ]; do
-        AASTR=""$AASTR""$AA""
+        AASTR=""$AASTR" "$AA""
         AA=$((AA+1))
       done
-      AASTR=""$AASTR""$AA""
+      AASTR=""$AASTR" "$AA""
     elif [ $AA = $BB ]; then
-      AASTR=""$AASTR""$AA""
+      AASTR=""$AASTR" "$AA""
       AA=$((AA+1))
     fi
-    echo ""$AASTR""$BBSTR""
+    RETURN+=(
+      $(echo ""$AASTR""$BBSTR"")
+    )
   done
+done
+
+unset IFS
+unset zRETURN
+for i in $RETURN[@]; do
+  if [ $zFLAG = 0 ]; then
+    zFLAG=1
+    zRETURN="$i"
+  else
+    zFLAG=0
+    zRETURN=""$zRETURN" :"$i""
+    echo $zRETURN
+    echo ""
+  fi
 done
