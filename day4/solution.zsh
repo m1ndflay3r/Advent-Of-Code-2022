@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 
+##
+## Part 1
+##
 INPUT=$(cat ./OGinput)
-
 IFS=$'\n\n'
 zFLAG=0
 unset RETURN
@@ -26,26 +28,25 @@ for a in $=INPUT; do
     unset BBSTR
     if [ $AA -gt $BB ]; then
       until [ $AA = $BB ]; do
-        BBSTR=""$BBSTR""$BB""
+        BBSTR=""$BBSTR""$BB"I"
         BB=$((BB+1))
       done
-      BBSTR=""$BBSTR""$BB""
+      BBSTR=""$BBSTR""$BB"I"
     elif [ $BB -gt $AA ]; then
       until [ $BB = $AA ]; do
-        AASTR=""$AASTR""$AA""
+        AASTR=""$AASTR""$AA"I"
         AA=$((AA+1))
       done
-      AASTR=""$AASTR""$AA""
+      AASTR=""$AASTR""$AA"I"
     elif [ $AA = $BB ]; then
-      AASTR=""$AASTR""$AA""
+      AASTR=""$AASTR""$AA"I"
       AA=$((AA+1))
     fi
     RETURN+=(
-      $(echo ""$AASTR""$BBSTR"")
+      $(echo "I"$AASTR""$BBSTR"")
     )
   done
 done
-
 unset IFS
 unset zRETURN
 rm -rf /$(pwd)/expandedinput
@@ -59,7 +60,6 @@ for i in $RETURN[@]; do
     echo $zRETURN >> /$(pwd)/expandedinput
   fi
 done
-
 EXPINPUT=$(cat ./expandedinput)
 IFS=$'\n'
 zFLAG=0
@@ -79,10 +79,14 @@ for i in $=EXPINPUT; do
       zFLAG=0
     fi
   done
-  if echo -n $COMPAREONE | grep $COMPARETWO &> /dev/null; then
+  if echo $COMPAREONE | grep $COMPARETWO &> /dev/null; then
     FINALCOUNT=$((FINALCOUNT+1))
-  elif echo -n $COMPARETWO | grep $COMPAREONE &> /dev/null; then
+  elif echo $COMPARETWO | grep $COMPAREONE &> /dev/null; then
     FINALCOUNT=$((FINALCOUNT+1))
   fi
 done
 echo $FINALCOUNT
+
+##
+## Part 2
+##
