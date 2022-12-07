@@ -4,7 +4,7 @@
 ## uncomment to generate libraw from OGinput
 ##
 #
-# OGIN=$(cat /$(pwd)/OGinput
+# OGIN=$(cat /$(pwd)/OGinput)
 # IFS=$'\n\n'
 # INTERMISSION=$(for i in $=OGIN; do echo -n $i && echo -n " "; done)
 # STAGE=${INTERMISSION//  /$'\n'}
